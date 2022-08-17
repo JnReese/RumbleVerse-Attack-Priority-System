@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { moveSet } from "./itemInfo";
+import styled from "styled-components";
+import AttackComparison from "./components/attackComparison";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Title>RumbleVerse Attack Priority</Title>
+      <Dialog>
+        Welcome to the Rumbleverse! This page aids RumbleVerse players in better understanding the Attack Priority
+        System. Pick two attacks then I will tell you why one move would beat another.{" "}
+      </Dialog>
+      <AttackComparison></AttackComparison>
+
+      {moveSet.map((move) => (
+        <img src={process.env.PUBLIC_URL + move.image} key={move.image} />
+      ))}
     </div>
   );
 }
 
 export default App;
+
+const Title = styled.h1``;
+const Dialog = styled.h2``;
