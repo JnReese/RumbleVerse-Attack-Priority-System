@@ -84,7 +84,7 @@ export const moveSet = [
     image: "/moveImgs/Special_Move_Vicious_Mist.png",
     Rarity: "Common",
     Type: "Chargeable",
-    dmg: 20,
+    dmg: 100,
     category: "Special Strike",
   },
   {
@@ -92,7 +92,7 @@ export const moveSet = [
     image: "/moveImgs/Special_Move_Bad_Breath.png",
     Rarity: "Rare",
     Type: "Poison",
-    dmg: 20,
+    dmg: 120,
     category: "Special Strike",
   },
   {
@@ -284,7 +284,7 @@ export const moveSet = [
     image: "/moveImgs/basic_punch.png",
     Rarity: "Innate",
     Type: "Basic Vicious Strike",
-    dmg: 30,
+    dmg: 120,
     category: "Basic Vicious",
   },
   {
@@ -292,7 +292,7 @@ export const moveSet = [
     image: "/moveImgs/basic_punch.png",
     Rarity: "Innate",
     Type: "Super",
-    dmg: 760,
+    dmg: 720,
     category: "Super",
   },
 ];

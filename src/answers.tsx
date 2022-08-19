@@ -35,6 +35,14 @@ export const answers: Record<string, string> = {
     "Super moves (attack gained from charging meter with either lootable stars or attacking players) tie on use at the same time as an opposing player will clash (no damage is delt to either player) . ",
 };
 
+const thing = {
+  Super: {
+    win: "win text",
+    lose: "lose text",
+    tie: "tie text",
+  },
+};
+
 export const rankItems: Record<string, number> = {
   Super: 7,
   Power: 6,
