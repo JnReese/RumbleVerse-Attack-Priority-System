@@ -16,6 +16,7 @@ export default function SimplePaper() {
   const [secondSelectedAttack, setSecondSelectedAttack] = useState<string>("");
   const [attackOutcome, setAttackOutcome] = useState<string>();
   const [outcomeInfo, setOutcomeInfo] = useState<string>();
+  const [playersAttackExists, setPlayerAtackExists] = useState<Boolean>(false);
 
   const handleChangeOne = (event: SelectChangeEvent) => {
     setFirstSelectedAttack(event.target.value as string);
@@ -28,13 +29,14 @@ export default function SimplePaper() {
     const outCome = fightOutcome();
     setAttackOutcome(outCome?.fightOutcome);
     setOutcomeInfo(outCome?.outcomeInfo);
+    setPlayerAtackExists(Boolean(firstSelectedAttack));
   }, [firstSelectedAttack, secondSelectedAttack]);
 
   const moveSetList = () => {
     return moveSet.map((move) => (
       <MenuItem value={move.name} key={move.name}>
         {move.name}
-        <TinyImg src={`${process.env.PUBLIC_URL + move.image}`}></TinyImg>
+        <TinyImg src={`${process.env.PUBLIC_URL + move.image}`} alt=""></TinyImg>
       </MenuItem>
     ));
   };
@@ -84,12 +86,13 @@ export default function SimplePaper() {
             width: 500,
             height: "100%",
             paddingBottom: "10px",
+            marginBottom: "30px",
           },
         }}
       >
         <Paper elevation={3}>
-          <Box sx={{ minWidth: 150, marginTop: "20px" }}>
-            <PlayersAttackText>Players Attack</PlayersAttackText>
+          <Box sx={{ minWidth: 150, marginTop: "20px", marginBottom: "40px" }}>
+            <PlayersAttackText>Players Attack 🤜</PlayersAttackText>
             <FormControl sx={{ minWidth: 100 }}>
               <InputLabel id="demo-simple-select-label">Attack </InputLabel>
               <Select
@@ -105,7 +108,7 @@ export default function SimplePaper() {
             <Verses>VS</Verses>
           </Box>
           <Box sx={{ minWidth: 150, marginTop: "20px" }}>
-            <PlayersAttackText>Opponents Attack</PlayersAttackText>
+            <PlayersAttackText>🤛 Opponents Attack </PlayersAttackText>
             <FormControl sx={{ minWidth: 100, marginBottom: "20px" }}>
               <InputLabel id="demo-simple-select-label">Attack</InputLabel>
               <Select
@@ -124,7 +127,7 @@ export default function SimplePaper() {
                 elevation={3}
                 sx={{ width: "75%", display: "flex", justifyContent: "center", padding: 2, margin: "0 auto" }}
               >
-                {firstSelectedAttack && !secondSelectedAttack ? (
+                {!firstSelectedAttack && secondSelectedAttack ? (
                   <Answer>Please enter a player attack to compare</Answer>
                 ) : (
                   <Answer>{outcomeInfo}</Answer>
@@ -137,6 +140,7 @@ export default function SimplePaper() {
       <AttackInformation
         firstSelectedAttack={firstSelectedAttack}
         secondSelectedAttack={secondSelectedAttack}
+        playersAttackExists={playersAttackExists}
       ></AttackInformation>
     </Container>
   );
@@ -167,8 +171,14 @@ const Outcome = styled.div`
   font-size: x-large;
   font-weight: 600;
   margin-bottom: 1em;
+  text-transform: capitalize;
 `;
 const Container = styled.div`
   display: flex;
   justify-content: center;
+  margin-bottom: 100px;
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;

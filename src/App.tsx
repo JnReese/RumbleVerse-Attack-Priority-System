@@ -5,16 +5,16 @@ import AttackComparison from "./components/attackComparison";
 
 function App() {
   return (
-    <div className="App">
+    <OverallContainer>
       <TitleContainer>
         <Title>RumbleVerse Attack Priority</Title>
         <Dialog>
           Welcome to the Rumbleverse! This page aids RumbleVerse players in better understanding the Attack Priority
-          System. Select two attacks then I will tell you why one move would beat another.{" "}
+          System. Select two attacks then I will tell you why and if one move would beat another.{" "}
         </Dialog>
       </TitleContainer>
       <AttackComparison></AttackComparison>
-    </div>
+    </OverallContainer>
   );
 }
 
@@ -25,14 +25,29 @@ const Title = styled.h1`
   font-family: "Black Han Sans", sans-serif;
   font-size: 50px;
   margin-bottom: 1rem;
+  width: 375px;
 `;
 const Dialog = styled.h2`
   font-size: 20px;
+  width: 50%;
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 `;
 const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  width: 30%;
-  margin: 0 auto;
+  text-align: center;
+  align-items: center;
+  @media (max-width: 768px) {
+    text-align: left;
+  }
+`;
+const OverallContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  @media (max-width: 768px) {
+  }
 `;

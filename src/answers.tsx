@@ -12,19 +12,19 @@ export const answers: Record<string, string> = {
   Basic_Strike_win:
     "Basic Strikes (jabs attacks innate to player) will win to any attack that is learned and has a Visicous Perk or is just a players innate Vicious attack. ",
   Basic_Strike_lose:
-    "Basic Strikes (jabs attacks innate to player) will lose to any attack found as loot with a High-Priority Perk, any character attacking with a weapon, any learned move WITHOUT a Vicious perk, and any character using a super move. ",
+    "Basic Strikes (jabs attacks innate to player) will lose to any attack found as loot with a High-Priority Perk, any character attacking with a weapon, any learned move WITHOUT a Vicious perk, and any character using a Super move. ",
   Basic_Strike_tie:
     "Basic Strikes (your characters innate jab attack) tie on use at the same time as an opposing player will clash (no damage is delt to either player) . ",
   Special_Strike_win:
     "Special Strikes (strikes learned from looting that don't have a Vicious perk attached) will win against all basic strikes (jab innate to player), all learned strikes with a Vicious perk, and all players innate Vicious attack. ",
   Special_Strike_lose:
-    "Special Strikes (strikes learned from looting without a Vicious perk attached) will lose against all attacks with weapons, all strikes learned with a High-Priority perk, and a players super. ",
+    "Special Strikes (strikes learned from looting without a Vicious perk attached) will lose against all attacks with weapons, all strikes learned with a High-Priority perk, and a players Super. ",
   Special_Strike_tie:
     "Special Strikes (your characters learned from looting attacks with no Vicious perk) tie on use at the same time as an opposing player will clash (no damage is delt to either player) . ",
   Power_win:
-    "Power moves (strikes learned from looting with a High-Priority perk) will win to opposing player using any move besides a super. ",
+    "Power moves (strikes learned from looting with a High-Priority perk) will win to opposing player using any move besides a Super. ",
   Power_lose:
-    "Power moves (strikes learned from looting with a High-Priority perk) will only lose to an opposing player using a super. ",
+    "Power moves (strikes learned from looting with a High-Priority perk) will only lose to an opposing player using a Super. ",
   Power_tie:
     "Power moves  (your characters leanred from looting attacks with a High-Priority perk) tie on use at the same time as an opposing player will clash (no damage is delt to either player). ",
   Super_win:
@@ -33,6 +33,12 @@ export const answers: Record<string, string> = {
     "Super moves (attack gained from charging meter with either lootable stars or attacking players) will never lose to a player using any move. ",
   Super_tie:
     "Super moves (attack gained from charging meter with either lootable stars or attacking players) tie on use at the same time as an opposing player will clash (no damage is delt to either player) . ",
+  Item_win:
+    "Wieldable Weapons either basic OR viciously attacking (attacks gained from looting a weapon from loot crates, found as ground loot, obtained from a garbage can, or obtained from stomping a bullseye target on the ground) will win to the opposing player using any move besides Super or a High Priority Special move.",
+  Item_lose:
+    "Wieldable Weapons either basic OR viciously attacking (attacks gained from looting a weapon from loot crates, found as ground loot, obtained from a garbage can, or obtained from stomping a bullseye target on the ground) will lose to the opposing player using Super or a special attack with the High Priority perk.",
+  Item_tie:
+    "Wieldable Weapons either basic OR viciously attacking (attacks gained from looting a weapon from loot crates, found as ground loot, obtained from a garbage can, or obtained from stomping a bullseye target on the ground) will tie to the opposing player using a weapon attack. ",
 };
 
 const thing = {
@@ -46,7 +52,7 @@ const thing = {
 export const rankItems: Record<string, number> = {
   Super: 7,
   Power: 6,
-  Weapon: 5,
+  Item: 5,
   Special_Strike: 4,
   Basic_Strike: 3,
   Special_Vicious: 2,
