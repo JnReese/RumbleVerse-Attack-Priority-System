@@ -10,7 +10,7 @@ function App() {
         <Title>RumbleVerse Attack Priority</Title>
         <Dialog>
           Welcome to the Rumbleverse! This page aids RumbleVerse players in better understanding the Attack Priority
-          System. Select two attacks then I will tell you why and if one move would beat another.{" "}
+          System. Select two attacks then I will tell you if and why one move would beat another.{" "}
         </Dialog>
       </TitleContainer>
       <AttackComparison></AttackComparison>
