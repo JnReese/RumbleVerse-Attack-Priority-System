@@ -11,51 +11,41 @@ import { useState, useEffect } from "react";
 import { moveSet } from "../itemInfo";
 import { answers, rankItems } from "../answers";
 
-export default function SimplePaper() {
-  const [firstSelectedAttack, setFirstSelectedAttack] = useState<string>("");
-  const [secondSelectedAttack, setSecondSelectedAttack] = useState<string>("");
+export default function AttackComparison() {
+  const [playerSelectedAttack, setPlayerSelectedAttack] = useState<string>("");
+  const [opponentSelectedAttack, setOpponentSelectedAttack] = useState<string>("");
   const [attackOutcome, setAttackOutcome] = useState<string>();
   const [outcomeInfo, setOutcomeInfo] = useState<string>();
-  const [playersAttackExists, setPlayerAtackExists] = useState<Boolean>(false);
 
-  const handleChangeOne = (event: SelectChangeEvent) => {
-    setFirstSelectedAttack(event.target.value as string);
+  const handleChangePlayerAttack = (event: SelectChangeEvent) => {
+    setPlayerSelectedAttack(event.target.value as string);
   };
-  const handleChangeTwo = (event: SelectChangeEvent) => {
-    setSecondSelectedAttack(event.target.value as string);
+
+  const handleChangeOpponentAttack = (event: SelectChangeEvent) => {
+    setOpponentSelectedAttack(event.target.value as string);
   };
 
   useEffect(() => {
     const outCome = fightOutcome();
     setAttackOutcome(outCome?.fightOutcome);
     setOutcomeInfo(outCome?.outcomeInfo);
-    setPlayerAtackExists(Boolean(firstSelectedAttack));
-  }, [firstSelectedAttack, secondSelectedAttack]);
-
-  const moveSetList = () => {
-    return moveSet.map((move) => (
-      <MenuItem value={move.name} key={move.name}>
-        {move.name}
-        <TinyImg src={`${process.env.PUBLIC_URL + move.image}`} alt=""></TinyImg>
-      </MenuItem>
-    ));
-  };
+  }, [playerSelectedAttack, opponentSelectedAttack]);
 
   const fightOutcome = (): undefined | { outcomeInfo: string; fightOutcome: string } => {
-    if (!firstSelectedAttack && !secondSelectedAttack) return undefined;
+    if (!playerSelectedAttack && !opponentSelectedAttack) return undefined;
 
-    let category1 = moveSet.find((move) => move.name === firstSelectedAttack)?.category.replaceAll(" ", "_") ?? "";
-    let category2 = moveSet.find((move) => move.name === secondSelectedAttack)?.category.replaceAll(" ", "_") ?? "";
+    let category1 = moveSet.find((move) => move.name === playerSelectedAttack)?.category.replaceAll(" ", "_") ?? "";
+    let category2 = moveSet.find((move) => move.name === opponentSelectedAttack)?.category.replaceAll(" ", "_") ?? "";
 
     let rank1 = rankItems[category1];
     let rank2 = rankItems[category2];
 
     const checkIsTie = () => {
-      return rank1 === rank2 || firstSelectedAttack === secondSelectedAttack;
+      return rank1 === rank2 || playerSelectedAttack === opponentSelectedAttack;
     };
 
     const checkIsWin = () => {
-      return !secondSelectedAttack || rank1 > rank2;
+      return !opponentSelectedAttack || rank1 > rank2;
     };
     let isWin = !checkIsTie() && checkIsWin();
     let isTie = checkIsTie();
@@ -77,70 +67,65 @@ export default function SimplePaper() {
 
   return (
     <Container>
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          "& > :not(style)": {
-            m: 1,
-            width: 500,
-            height: "100%",
-            paddingBottom: "10px",
-            marginBottom: "30px",
-          },
-        }}
-      >
-        <Paper elevation={3}>
-          <Box sx={{ minWidth: 150, marginTop: "20px", marginBottom: "40px" }}>
+      <InnerContainer>
+        <Paper elevation={3} sx={{ m: 1, width: 500, height: "100%", paddingBottom: "10px", marginBottom: "30px" }}>
+          <PlayerAttackContainer>
             <PlayersAttackText>Players Attack 🤜</PlayersAttackText>
             <FormControl sx={{ minWidth: 100 }}>
-              <InputLabel id="demo-simple-select-label">Attack </InputLabel>
+              <InputLabel id="player-attack">Attack </InputLabel>
               <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={firstSelectedAttack}
-                label="Attack 1"
-                onChange={handleChangeOne}
+                labelId="player-attack"
+                value={playerSelectedAttack}
+                label="Player's Attack"
+                onChange={handleChangePlayerAttack}
               >
-                {moveSetList()}
+                {moveSet.map((move) => (
+                  <MenuItem value={move.name} key={move.name}>
+                    {move.name}
+                    <TinyImg src={`${process.env.PUBLIC_URL + move.image}`} alt="" />
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
             <Verses>VS</Verses>
-          </Box>
-          <Box sx={{ minWidth: 150, marginTop: "20px" }}>
+          </PlayerAttackContainer>
+          <OpponentAttackContainer>
             <PlayersAttackText>🤛 Opponents Attack </PlayersAttackText>
             <FormControl sx={{ minWidth: 100, marginBottom: "20px" }}>
-              <InputLabel id="demo-simple-select-label">Attack</InputLabel>
+              <InputLabel id="opponent-attack">Attack</InputLabel>
               <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={secondSelectedAttack}
-                label="Attack 2"
-                onChange={handleChangeTwo}
+                labelId="opponent-attack"
+                value={opponentSelectedAttack}
+                label="Opponent's Attack"
+                onChange={handleChangeOpponentAttack}
               >
-                {moveSetList()}
+                {moveSet.map((move) => (
+                  <MenuItem value={move.name} key={move.name}>
+                    {move.name}
+                    <TinyImg src={`${process.env.PUBLIC_URL + move.image}`} alt="" />
+                  </MenuItem>
+                ))}
               </Select>
-              {firstSelectedAttack ? <Outcome>Fight Outcome: {attackOutcome}</Outcome> : null}
             </FormControl>
-            {firstSelectedAttack || secondSelectedAttack ? (
+            {Boolean(playerSelectedAttack) && <Outcome>Fight Outcome: {attackOutcome}</Outcome>}
+            {playerSelectedAttack || opponentSelectedAttack ? (
               <Paper
                 elevation={3}
                 sx={{ width: "75%", display: "flex", justifyContent: "center", padding: 2, margin: "0 auto" }}
               >
-                {!firstSelectedAttack && secondSelectedAttack ? (
+                {!playerSelectedAttack && opponentSelectedAttack ? (
                   <Answer>Please enter a player attack to compare</Answer>
                 ) : (
                   <Answer>{outcomeInfo}</Answer>
                 )}
               </Paper>
             ) : null}
-          </Box>
+          </OpponentAttackContainer>
         </Paper>
-      </Box>
+      </InnerContainer>
       <AttackInformation
-        firstSelectedAttack={firstSelectedAttack}
-        secondSelectedAttack={secondSelectedAttack}
-        playersAttackExists={playersAttackExists}
+        playerSelectedAttack={playerSelectedAttack}
+        opponentSelectedAttack={opponentSelectedAttack}
       ></AttackInformation>
     </Container>
   );
@@ -181,4 +166,25 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
   }
+`;
+
+const InnerContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1em;
+  width: 500px;
+  height: 100%;
+  paddingbottom: 10px;
+  marginbottom: 30px;
+`;
+
+const PlayerAttackContainer = styled.div`
+  min-width: 150px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+`;
+
+const OpponentAttackContainer = styled.div`
+  min-width: 150px;
+  margintop: 20px;
 `;

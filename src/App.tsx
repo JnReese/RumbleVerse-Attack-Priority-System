@@ -13,7 +13,7 @@ function App() {
           System. Select two attacks then I will tell you if and why one move would beat another.{" "}
         </Dialog>
       </TitleContainer>
-      <AttackComparison></AttackComparison>
+      <AttackComparison />
     </OverallContainer>
   );
 }

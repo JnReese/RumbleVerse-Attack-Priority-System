@@ -14,4 +14,14 @@ describe("attack comparison", () => {
     expect(screen.getByText(`Damage : ${secondSelectedAttackData.dmg}`)).toBeInTheDocument();
     expect(screen.getByText(`Rarity : ${secondSelectedAttackData.Rarity}`)).toBeInTheDocument();
   });
+  it("user can increase or decrease attack multiplier for each move", () => {
+    render(
+      <AttackInformation
+        firstSelectedAttack={"Super Chokeslam"}
+        secondSelectedAttack={"Chokeslam"}
+        playersAttackExists
+      />
+    );
+    screen.getByLabelText("reduce attack multiplier");
+  });
 });

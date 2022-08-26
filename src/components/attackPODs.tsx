@@ -10,10 +10,9 @@ import { useState, useEffect } from "react";
 
 type AttackCount = {
   setBadgeCount: (value: number) => void;
-  playersAttackExists: Boolean;
 };
 
-export default function BadgeVisibility({ setBadgeCount, playersAttackExists }: AttackCount) {
+export default function AttackPods({ setBadgeCount }: AttackCount) {
   const [count, setCount] = React.useState(0);
   const [invisible, setInvisible] = React.useState(false);
 
@@ -23,7 +22,7 @@ export default function BadgeVisibility({ setBadgeCount, playersAttackExists }: 
 
   return (
     <>
-      {playersAttackExists ? (
+      {true ? (
         <Box
           sx={{
             color: "action.active",
@@ -43,17 +42,17 @@ export default function BadgeVisibility({ setBadgeCount, playersAttackExists }: 
             </Badge>
             <ButtonGroup>
               <Button
-                aria-label="reduce"
+                aria-label="reduce attack multiplier"
                 onClick={() => {
                   if (count) {
-                    setCount(Math.max(count - 1, 0));
+                    setCount(count - 1);
                   }
                 }}
               >
                 <RemoveIcon fontSize="small" />
               </Button>
               <Button
-                aria-label="increase"
+                aria-label="increase attack multiplier"
                 onClick={() => {
                   if (count < 10) {
                     setCount(count + 1);

@@ -8,12 +8,11 @@ import { moveSet } from "../itemInfo";
 import { useState } from "react";
 
 interface AttackType {
-  secondSelectedAttack: string;
-  firstSelectedAttack: string;
-  playersAttackExists: Boolean;
+  opponentSelectedAttack: string;
+  playerSelectedAttack: string;
 }
 
-export default function SimplePaper({ secondSelectedAttack, firstSelectedAttack, playersAttackExists }: AttackType) {
+export default function AttackInformation({ opponentSelectedAttack, playerSelectedAttack }: AttackType) {
   const [badgeCount, setBadgeCount] = useState<number>(0);
 
   const attackMulitplier: Record<string, number> = {
@@ -30,85 +29,13 @@ export default function SimplePaper({ secondSelectedAttack, firstSelectedAttack,
     10: 1.25,
   };
 
-  const placeImg = () => {
-    let category1 = moveSet.find((move) => move.name === firstSelectedAttack)?.image.replaceAll(" ", "_") ?? "";
-    let category2 = moveSet.find((move) => move.name === secondSelectedAttack)?.image.replaceAll(" ", "_") ?? "";
-    let rarity1 = moveSet.find((move) => move.name === firstSelectedAttack)?.Rarity;
-    let rarity2 = moveSet.find((move) => move.name === secondSelectedAttack)?.Rarity;
-    let dmg1 = moveSet.find((move) => move.name === firstSelectedAttack)?.dmg;
-    let dmg2 = moveSet.find((move) => move.name === secondSelectedAttack)?.dmg;
-    let viciousDMG1 = moveSet.find((move) => move.name === firstSelectedAttack)?.viciousDMG;
-    let viciousDMG2 = moveSet.find((move) => move.name === secondSelectedAttack)?.viciousDMG;
-    let throwDMG1 = moveSet.find((move) => move.name === firstSelectedAttack)?.thrown;
-    let throwDMG2 = moveSet.find((move) => move.name === secondSelectedAttack)?.thrown;
-    let multiplier = attackMulitplier[badgeCount];
+  const playerAttackData = moveSet.find((move) => move.name === playerSelectedAttack);
+  const opponentAttackData = moveSet.find((move) => move.name === opponentSelectedAttack);
+  const multiplier = attackMulitplier[badgeCount];
 
-    const checkIfSameAttack = () => {
-      return category1 === category2;
-    };
-
-    if (checkIfSameAttack() || !firstSelectedAttack || !secondSelectedAttack) {
-      return (
-        <Stack direction="column" spacing={1} width="50%" alignItems={"center"} marginBottom="40px">
-          <TinyImg
-            src={`${process.env.PUBLIC_URL + category1 ? category1 : category2}`}
-            data-testid="attackInfoImg1"
-          ></TinyImg>
-          {rarity1 || rarity2 ? <Chip label={`Rarity : ${rarity1 ? rarity1 : rarity2}`} color="info" /> : null}
-          {viciousDMG1 || viciousDMG2 ? (
-            <Chip
-              label={`Vicious Damage : ${
-                viciousDMG1 ? Math.floor(viciousDMG1 + multiplier * viciousDMG1) : viciousDMG2
-              }`}
-              color="error"
-            />
-          ) : null}
-          {throwDMG1 || throwDMG2 ? (
-            <Chip label={`Throw Damage : ${throwDMG1 ? throwDMG1 : throwDMG2}`} color="secondary" />
-          ) : null}
-          <Chip label={`Damage : ${dmg1 ? Math.floor(dmg1 + multiplier * dmg1) : dmg2}`} color="warning" />
-          <AttackPODs setBadgeCount={setBadgeCount} playersAttackExists={playersAttackExists} />
-        </Stack>
-      );
-    } else {
-      return (
-        <Stack direction="column" spacing={1} width="50%" alignItems={"center"} marginTop="1em" marginBottom="4em">
-          <TinyImg
-            src={`${process.env.PUBLIC_URL + category1}`}
-            data-testid="attackInfoImg1"
-            alt={firstSelectedAttack}
-          ></TinyImg>
-          {rarity1 ? <Chip label={`Rarity : ${rarity1 ? rarity1 : null}`} color="info" /> : null}
-          {viciousDMG1 ? (
-            <Chip
-              label={`Vicious Damage : ${viciousDMG1 ? Math.floor(viciousDMG1 + multiplier * viciousDMG1) : null}`}
-              color="error"
-            />
-          ) : null}
-          {throwDMG1 ? <Chip label={`Throw Damage : ${throwDMG1 ? throwDMG1 : throwDMG2}`} color="secondary" /> : null}
-          <Chip label={`Damage : ${dmg1 ? Math.floor(dmg1 + multiplier * dmg1) : dmg1}`} color="warning" />
-          <TinyImg
-            src={`${process.env.PUBLIC_URL + category2}`}
-            data-testid="attackInfoImg2"
-            alt={secondSelectedAttack}
-          ></TinyImg>
-          {rarity2 ? <Chip label={`Rarity : ${rarity2}`} color="info" /> : null}
-          {viciousDMG2 ? (
-            <Chip
-              label={`Vicious Damage : ${viciousDMG2 ? Math.floor(viciousDMG2 + multiplier * viciousDMG2) : null}`}
-              color="error"
-            />
-          ) : null}
-          {throwDMG2 ? <Chip label={`Throw Damage : ${throwDMG2 ? throwDMG2 : throwDMG1}`} color="secondary" /> : null}
-          <Chip label={`Damage : ${dmg2 ? Math.floor(dmg2 + multiplier * dmg2) : dmg2}`} color="warning" />
-          <AttackPODs setBadgeCount={setBadgeCount} playersAttackExists={playersAttackExists} />
-        </Stack>
-      );
-    }
-  };
   return (
     <>
-      {firstSelectedAttack || secondSelectedAttack ? (
+      {playerSelectedAttack || opponentSelectedAttack ? (
         <Box
           sx={{
             display: "flex",
@@ -122,7 +49,42 @@ export default function SimplePaper({ secondSelectedAttack, firstSelectedAttack,
           }}
         >
           <Paper elevation={3}>
-            <InfomationLayout>{placeImg()}</InfomationLayout>
+            <InfomationLayout>
+              {
+                <Stack direction="column" spacing={1} width="50%" alignItems={"center"} marginBottom="40px">
+                  {[playerAttackData, opponentAttackData].map((attackData) => {
+                    if (attackData)
+                      return (
+                        <>
+                          <TinyImg
+                            src={`${process.env.PUBLIC_URL + attackData?.image.replaceAll(" ", "_") ?? ""}`}
+                            data-testid="attackInfoImg1"
+                          ></TinyImg>
+                          {Boolean(attackData.Rarity) && <Chip label={`Rarity : ${attackData.Rarity}`} color="info" />}
+                          {Boolean(attackData.viciousDMG) && (
+                            <Chip
+                              label={`Vicious Damage : ${Math.floor(
+                                attackData.viciousDMG! + multiplier * attackData.viciousDMG!
+                              )}`}
+                              color="error"
+                            />
+                          )}
+                          {Boolean(attackData.thrown) && (
+                            <Chip label={`Throw Damage : ${attackData.thrown}`} color="secondary" />
+                          )}
+                          {Boolean(attackData.dmg) && (
+                            <Chip
+                              label={`Damage : ${Math.floor(attackData.dmg! + multiplier * attackData.dmg!)}`}
+                              color="warning"
+                            />
+                          )}
+                        </>
+                      );
+                  })}
+                  <AttackPODs setBadgeCount={setBadgeCount} />
+                </Stack>
+              }
+            </InfomationLayout>
             <div>
               <SideNote>* Players start each round with a base 1,000 health</SideNote>
             </div>
