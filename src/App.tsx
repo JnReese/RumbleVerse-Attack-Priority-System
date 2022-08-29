@@ -8,10 +8,7 @@ function App() {
     <OverallContainer>
       <TitleContainer>
         <Title>RumbleVerse Attack Priority</Title>
-        <Dialog>
-          Welcome to the Rumbleverse! This page aids RumbleVerse players in better understanding the Attack Priority
-          System. Select two attacks then I will tell you if and why one move would beat another.{" "}
-        </Dialog>
+        <Dialog>Welcome to the Rumbleverse! Select two attacks to find if and why one move would beat another. </Dialog>
       </TitleContainer>
       <AttackComparison />
     </OverallContainer>

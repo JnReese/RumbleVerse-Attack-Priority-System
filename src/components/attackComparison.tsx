@@ -1,5 +1,3 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -10,6 +8,44 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useState, useEffect } from "react";
 import { moveSet } from "../itemInfo";
 import { answers, rankItems } from "../answers";
+
+export const fightOutcome = (
+  playerSelectedAttack?: string,
+  opponentSelectedAttack?: string
+): undefined | { outcomeInfo: string; fightOutcome: string } => {
+  if (!playerSelectedAttack && !opponentSelectedAttack) return undefined;
+
+  let category1 = moveSet.find((move) => move.name === playerSelectedAttack)?.category.replaceAll(" ", "_") ?? "";
+  let category2 = moveSet.find((move) => move.name === opponentSelectedAttack)?.category.replaceAll(" ", "_") ?? "";
+
+  let rank1 = rankItems[category1];
+  let rank2 = rankItems[category2];
+
+  const checkIsTie = () => {
+    return rank1 === rank2 || playerSelectedAttack === opponentSelectedAttack;
+  };
+
+  const checkIsWin = () => {
+    return !opponentSelectedAttack || rank1 > rank2;
+  };
+  let isWin = !checkIsTie() && checkIsWin();
+  let isTie = checkIsTie();
+
+  const outcomeStatus = () => {
+    if (isWin) {
+      return "win";
+    } else if (isTie) {
+      return "tie";
+    } else {
+      return "lose";
+    }
+  };
+
+  return {
+    fightOutcome: outcomeStatus(),
+    outcomeInfo: answers[`${category1}_${outcomeStatus()}`],
+  };
+};
 
 export default function AttackComparison() {
   const [playerSelectedAttack, setPlayerSelectedAttack] = useState<string>("");
@@ -26,53 +62,19 @@ export default function AttackComparison() {
   };
 
   useEffect(() => {
-    const outCome = fightOutcome();
+    const outCome = fightOutcome(playerSelectedAttack, opponentSelectedAttack);
     setAttackOutcome(outCome?.fightOutcome);
     setOutcomeInfo(outCome?.outcomeInfo);
   }, [playerSelectedAttack, opponentSelectedAttack]);
-
-  const fightOutcome = (): undefined | { outcomeInfo: string; fightOutcome: string } => {
-    if (!playerSelectedAttack && !opponentSelectedAttack) return undefined;
-
-    let category1 = moveSet.find((move) => move.name === playerSelectedAttack)?.category.replaceAll(" ", "_") ?? "";
-    let category2 = moveSet.find((move) => move.name === opponentSelectedAttack)?.category.replaceAll(" ", "_") ?? "";
-
-    let rank1 = rankItems[category1];
-    let rank2 = rankItems[category2];
-
-    const checkIsTie = () => {
-      return rank1 === rank2 || playerSelectedAttack === opponentSelectedAttack;
-    };
-
-    const checkIsWin = () => {
-      return !opponentSelectedAttack || rank1 > rank2;
-    };
-    let isWin = !checkIsTie() && checkIsWin();
-    let isTie = checkIsTie();
-
-    const outcomeStatus = () => {
-      if (isWin) {
-        return "win";
-      } else if (isTie) {
-        return "tie";
-      } else {
-        return "lose";
-      }
-    };
-    return {
-      fightOutcome: outcomeStatus(),
-      outcomeInfo: answers[`${category1}_${outcomeStatus()}`],
-    };
-  };
 
   return (
     <Container>
       <InnerContainer>
         <Paper elevation={3} sx={{ m: 1, width: 500, height: "100%", paddingBottom: "10px", marginBottom: "30px" }}>
           <PlayerAttackContainer>
-            <PlayersAttackText>Players Attack 🤜</PlayersAttackText>
-            <FormControl sx={{ minWidth: 100 }}>
-              <InputLabel id="player-attack">Attack </InputLabel>
+            <PlayersAttackText>Player's Attack 🤜</PlayersAttackText>
+            <FormControl sx={{ minWidth: 170 }}>
+              <InputLabel id="player-attack">Player Attack </InputLabel>
               <Select
                 labelId="player-attack"
                 value={playerSelectedAttack}
@@ -90,9 +92,9 @@ export default function AttackComparison() {
             <Verses>VS</Verses>
           </PlayerAttackContainer>
           <OpponentAttackContainer>
-            <PlayersAttackText>🤛 Opponents Attack </PlayersAttackText>
-            <FormControl sx={{ minWidth: 100, marginBottom: "20px" }}>
-              <InputLabel id="opponent-attack">Attack</InputLabel>
+            <PlayersAttackText>🤛 Opponent's Attack </PlayersAttackText>
+            <FormControl sx={{ minWidth: 170, marginBottom: "20px" }}>
+              <InputLabel id="opponent-attack">Opponent Attack</InputLabel>
               <Select
                 labelId="opponent-attack"
                 value={opponentSelectedAttack}

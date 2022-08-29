@@ -1,4 +1,5 @@
 import Box from "@mui/material/Box";
+import { Fragment } from "react";
 import Paper from "@mui/material/Paper";
 import styled from "styled-components";
 import AttackPODs from "./attackPODs";
@@ -7,6 +8,20 @@ import Stack from "@mui/material/Stack";
 import { moveSet } from "../itemInfo";
 import { useState } from "react";
 
+export const attackMulitplier: Record<string, number> = {
+  0: 0,
+  1: 0.1,
+  2: 0.2,
+  3: 0.3,
+  4: 0.4,
+  5: 0.6,
+  6: 0.7,
+  7: 0.8,
+  8: 0.9,
+  9: 1,
+  10: 1.25,
+};
+
 interface AttackType {
   opponentSelectedAttack: string;
   playerSelectedAttack: string;
@@ -14,20 +29,6 @@ interface AttackType {
 
 export default function AttackInformation({ opponentSelectedAttack, playerSelectedAttack }: AttackType) {
   const [badgeCount, setBadgeCount] = useState<number>(0);
-
-  const attackMulitplier: Record<string, number> = {
-    0: 0,
-    1: 0.1,
-    2: 0.2,
-    3: 0.3,
-    4: 0.4,
-    5: 0.6,
-    6: 0.7,
-    7: 0.8,
-    8: 0.9,
-    9: 1,
-    10: 1.25,
-  };
 
   const playerAttackData = moveSet.find((move) => move.name === playerSelectedAttack);
   const opponentAttackData = moveSet.find((move) => move.name === opponentSelectedAttack);
@@ -55,10 +56,11 @@ export default function AttackInformation({ opponentSelectedAttack, playerSelect
                   {[playerAttackData, opponentAttackData].map((attackData) => {
                     if (attackData)
                       return (
-                        <>
+                        <Fragment key={attackData.name}>
                           <TinyImg
                             src={`${process.env.PUBLIC_URL + attackData?.image.replaceAll(" ", "_") ?? ""}`}
-                            data-testid="attackInfoImg1"
+                            alt={attackData?.name}
+                            data-testid={attackData?.name}
                           ></TinyImg>
                           {Boolean(attackData.Rarity) && <Chip label={`Rarity : ${attackData.Rarity}`} color="info" />}
                           {Boolean(attackData.viciousDMG) && (
@@ -78,7 +80,7 @@ export default function AttackInformation({ opponentSelectedAttack, playerSelect
                               color="warning"
                             />
                           )}
-                        </>
+                        </Fragment>
                       );
                   })}
                   <AttackPODs setBadgeCount={setBadgeCount} />
