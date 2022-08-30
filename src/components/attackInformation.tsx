@@ -5,6 +5,7 @@ import styled from "styled-components";
 import AttackPODs from "./attackPODs";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
+import uniq from "lodash/uniq";
 import { moveSet } from "../itemInfo";
 import { useState } from "react";
 
@@ -32,6 +33,7 @@ export default function AttackInformation({ opponentSelectedAttack, playerSelect
 
   const playerAttackData = moveSet.find((move) => move.name === playerSelectedAttack);
   const opponentAttackData = moveSet.find((move) => move.name === opponentSelectedAttack);
+  const _ = require("lodash");
   const multiplier = attackMulitplier[badgeCount];
 
   return (
@@ -53,7 +55,7 @@ export default function AttackInformation({ opponentSelectedAttack, playerSelect
             <InfomationLayout>
               {
                 <Stack direction="column" spacing={1} width="50%" alignItems={"center"} marginBottom="40px">
-                  {[playerAttackData, opponentAttackData].map((attackData) => {
+                  {uniq([playerAttackData, opponentAttackData]).map((attackData: any) => {
                     if (attackData)
                       return (
                         <Fragment key={attackData.name}>

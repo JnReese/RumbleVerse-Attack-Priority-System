@@ -47,6 +47,8 @@ export const fightOutcome = (
   };
 };
 
+console.log(fightOutcome(undefined, "Chokeslam")?.outcomeInfo);
+
 export default function AttackComparison() {
   const [playerSelectedAttack, setPlayerSelectedAttack] = useState<string>("");
   const [opponentSelectedAttack, setOpponentSelectedAttack] = useState<string>("");
@@ -60,6 +62,8 @@ export default function AttackComparison() {
   const handleChangeOpponentAttack = (event: SelectChangeEvent) => {
     setOpponentSelectedAttack(event.target.value as string);
   };
+
+  const displayListOfAttacks = () => {};
 
   useEffect(() => {
     const outCome = fightOutcome(playerSelectedAttack, opponentSelectedAttack);
@@ -109,7 +113,7 @@ export default function AttackComparison() {
                 ))}
               </Select>
             </FormControl>
-            {Boolean(playerSelectedAttack) && <Outcome>Fight Outcome: {attackOutcome}</Outcome>}
+            {Boolean(playerSelectedAttack) && <Outcome>{`Fight Outcome: ${attackOutcome}`}</Outcome>}
             {playerSelectedAttack || opponentSelectedAttack ? (
               <Paper
                 elevation={3}
