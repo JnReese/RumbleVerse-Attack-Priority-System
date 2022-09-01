@@ -39,22 +39,11 @@ export default function AttackInformation({ opponentSelectedAttack, playerSelect
   return (
     <>
       {playerSelectedAttack || opponentSelectedAttack ? (
-        <Box
-          sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            "& > :not(style)": {
-              m: 1,
-              width: 500,
-              height: "100%",
-              flexDirection: "column",
-            },
-          }}
-        >
-          <Paper elevation={3}>
+        <Container>
+          <Paper elevation={3} sx={{ m: 1, width: 500, height: "100%", paddingBottom: "10px", marginBottom: "30px" }}>
             <InfomationLayout>
               {
-                <Stack direction="column" spacing={1} width="50%" alignItems={"center"} marginBottom="40px">
+                <Stack direction="column" spacing={1} alignItems={"center"}>
                   {uniq([playerAttackData, opponentAttackData]).map((attackData: any) => {
                     if (attackData)
                       return (
@@ -93,7 +82,7 @@ export default function AttackInformation({ opponentSelectedAttack, playerSelect
               <SideNote>* Players start each round with a base 1,000 health</SideNote>
             </div>
           </Paper>
-        </Box>
+        </Container>
       ) : null}
     </>
   );
@@ -111,4 +100,14 @@ const SideNote = styled.span`
 const InfomationLayout = styled.div`
   display: flex;
   justify-content: center;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1em;
+  width: 500px;
+  paddingbottom: 10px;
+  marginbottom: 30px;
+  height: fit-content;
 `;

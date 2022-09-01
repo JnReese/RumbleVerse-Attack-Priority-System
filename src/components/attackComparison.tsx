@@ -63,8 +63,6 @@ export default function AttackComparison() {
     setOpponentSelectedAttack(event.target.value as string);
   };
 
-  const displayListOfAttacks = () => {};
-
   useEffect(() => {
     const outCome = fightOutcome(playerSelectedAttack, opponentSelectedAttack);
     setAttackOutcome(outCome?.fightOutcome);
@@ -179,9 +177,9 @@ const InnerContainer = styled.div`
   flex-wrap: wrap;
   margin: 1em;
   width: 500px;
-  height: 100%;
   paddingbottom: 10px;
   marginbottom: 30px;
+  height: fit-content;
 `;
 
 const PlayerAttackContainer = styled.div`

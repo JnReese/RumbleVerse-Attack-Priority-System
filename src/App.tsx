@@ -2,6 +2,7 @@ import "./App.css";
 import { moveSet } from "./itemInfo";
 import styled from "styled-components";
 import AttackComparison from "./components/attackComparison";
+import AttackCombos from "./components/attackCombos";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Dialog>Welcome to the Rumbleverse! Select two attacks to find if and why one move would beat another. </Dialog>
       </TitleContainer>
       <AttackComparison />
+      <AttackCombos />
     </OverallContainer>
   );
 }

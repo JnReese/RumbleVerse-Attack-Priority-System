@@ -6,6 +6,7 @@ export const moveSet = [
     Type: "Vicious",
     dmg: 210,
     category: "Special Vicious",
+    comboAble: "Grab",
   },
   {
     name: "Super Chokeslam",
@@ -14,6 +15,7 @@ export const moveSet = [
     Type: "Vicious Chargeable",
     dmg: 230,
     category: "Special Vicious",
+    comboAble: "Grab",
   },
   {
     name: "Goal Shot",
@@ -22,6 +24,7 @@ export const moveSet = [
     Type: "",
     dmg: 170,
     category: "Special Strike",
+    comboAble: "Static",
   },
   {
     name: "Rekt Shot",
@@ -30,6 +33,7 @@ export const moveSet = [
     Type: "",
     dmg: 180,
     category: "Special Strike",
+    comboAble: "Static",
   },
   {
     name: "Cozmo Shot",
@@ -38,6 +42,7 @@ export const moveSet = [
     Type: "",
     dmg: 210,
     category: "Special Strike",
+    comboAble: "Static",
   },
   {
     name: "Volley Dive",
@@ -46,6 +51,7 @@ export const moveSet = [
     Type: "",
     dmg: 100,
     category: "Special Strike",
+    comboAble: "Grab",
   },
   {
     name: "Dolphin Dive",
@@ -54,6 +60,7 @@ export const moveSet = [
     Type: "",
     dmg: 120,
     category: "Special Strike",
+    comboAble: "Grab",
   },
   {
     name: "Ruby Crusher",
@@ -62,6 +69,7 @@ export const moveSet = [
     Type: "Chargeable",
     dmg: 250,
     category: "Special Strike",
+    comboAble: "Grab",
   },
   {
     name: "Emerald Crusher",
@@ -70,6 +78,7 @@ export const moveSet = [
     Type: "Chargeable",
     dmg: 280,
     category: "Special Strike",
+    comboAble: "Grab",
   },
   {
     name: "Diamond Crusher",
@@ -78,6 +87,7 @@ export const moveSet = [
     Type: "Chargeable",
     dmg: 316,
     category: "Special Strike",
+    comboAble: "Grab",
   },
   {
     name: "Vicious Mist",
@@ -86,6 +96,7 @@ export const moveSet = [
     Type: "Chargeable",
     dmg: 100,
     category: "Special Vicious",
+    comboAble: "Static",
   },
   {
     name: "Bad Breath",
@@ -94,6 +105,7 @@ export const moveSet = [
     Type: "Poison",
     dmg: 120,
     category: "Special Strike",
+    comboAble: "Static",
   },
   {
     name: "Big Swing",
@@ -102,6 +114,7 @@ export const moveSet = [
     Type: "Vicious ",
     dmg: 94,
     category: "Special Vicious",
+    comboAble: "Grab",
   },
   {
     name: "Giant Swing",
@@ -110,6 +123,7 @@ export const moveSet = [
     Type: "Vicious ",
     dmg: 213,
     category: "Special Vicious",
+    comboAble: "Grab",
   },
   {
     name: "Punchline",
@@ -118,6 +132,7 @@ export const moveSet = [
     Type: "",
     dmg: 250,
     category: "Special Strike",
+    comboAble: "Grab",
   },
   {
     name: "Atomic Punchline",
@@ -126,6 +141,7 @@ export const moveSet = [
     Type: "",
     dmg: 300,
     category: "Special Strike",
+    comboAble: "Grab",
   },
   {
     name: "Cyclone",
@@ -134,6 +150,7 @@ export const moveSet = [
     Type: "Chargeable",
     dmg: 120,
     category: "Special Strike",
+    comboAble: "Grab",
   },
   {
     name: "Super Cyclone",
@@ -142,6 +159,7 @@ export const moveSet = [
     Type: "Chargeable",
     dmg: 130,
     category: "Special Strike",
+    comboAble: "Grab",
   },
   {
     name: "Omega Cyclone",
@@ -150,6 +168,7 @@ export const moveSet = [
     Type: "Chargeable",
     dmg: 170,
     category: "Special Strike",
+    comboAble: "Grab",
   },
   {
     name: "Superkick",
@@ -158,6 +177,7 @@ export const moveSet = [
     Type: "Chargeable",
     dmg: 170,
     category: "Special Strike",
+    comboAble: "Static",
   },
   {
     name: "Superduper Kick",
@@ -166,6 +186,7 @@ export const moveSet = [
     Type: "Chargeable",
     dmg: 195,
     category: "Special Strike",
+    comboAble: "Static",
   },
   {
     name: "Tackle",
@@ -174,6 +195,7 @@ export const moveSet = [
     Type: "Vicious",
     dmg: 270,
     category: "Special Vicious",
+    comboAble: "Grab",
   },
   {
     name: "Spear Tackle",
@@ -182,6 +204,7 @@ export const moveSet = [
     Type: "Vicious",
     dmg: 300,
     category: "Special Vicious",
+    comboAble: "Grab",
   },
   {
     name: "Javelin Tackle",
@@ -190,6 +213,7 @@ export const moveSet = [
     Type: "Vicious",
     dmg: 300,
     category: "Special Vicious",
+    comboAble: "Grab",
   },
   {
     name: "SumoSlap",
@@ -198,6 +222,7 @@ export const moveSet = [
     Type: "",
     dmg: 110,
     category: "Special Strike",
+    comboAble: "Static",
   },
   {
     name: "PoisonSlap",
@@ -206,6 +231,7 @@ export const moveSet = [
     Type: "Chargeable Poison",
     dmg: 110,
     category: "Special Strike",
+    comboAble: "Static",
   },
   {
     name: "Super SumoSlap",
@@ -214,6 +240,7 @@ export const moveSet = [
     Type: "Chargeable",
     dmg: 130,
     category: "Special Strike",
+    comboAble: "Static",
   },
   {
     name: "Uppercut",
@@ -222,6 +249,7 @@ export const moveSet = [
     Type: "High Priority",
     dmg: 160,
     category: "Power",
+    comboAble: "Static",
   },
   {
     name: "Bionic Uppercut",
@@ -230,6 +258,7 @@ export const moveSet = [
     Type: "High Priority Chargeable",
     dmg: 180,
     category: "Power",
+    comboAble: "Static",
   },
   {
     name: "Omega Uppercut",
@@ -238,6 +267,7 @@ export const moveSet = [
     Type: "High Priority Chargeable",
     dmg: 200,
     category: "Power",
+    comboAble: "Static",
   },
   {
     name: "Rocket Jump",
@@ -246,6 +276,7 @@ export const moveSet = [
     Type: "Chargeable",
     dmg: 120,
     category: "Special Strike",
+    comboAble: "Static",
   },
   {
     name: "Skyrocket",
@@ -254,6 +285,7 @@ export const moveSet = [
     Type: "Chargeable",
     dmg: 120,
     category: "Special Strike",
+    comboAble: "Static",
   },
   {
     name: "Good IzunaDrop",
@@ -262,6 +294,7 @@ export const moveSet = [
     Type: "Vicious ",
     dmg: 225,
     category: "Special Strike",
+    comboAble: "Grab",
   },
   {
     name: "Great IzunaDrop",
@@ -270,13 +303,22 @@ export const moveSet = [
     Type: "Vicious ",
     dmg: 250,
     category: "Special Vicious",
+    comboAble: "Grab",
   },
   {
-    name: "Left Click Attack",
+    name: "Innate Jab",
     image: "/moveImgs/basic_punch.png",
     Rarity: "Innate",
     Type: "Basic Strike",
     dmg: 30,
+    category: "Basic Strike",
+  },
+  {
+    name: "Charged Innate Basic Jab",
+    image: "/moveImgs/basic_punch.png",
+    Rarity: "Innate",
+    Type: "Basic Strike",
+    dmg: 100,
     category: "Basic Strike",
   },
   {
@@ -294,6 +336,71 @@ export const moveSet = [
     Type: "Super",
     dmg: 720,
     category: "Super",
+    comboAble: "Grab",
+  },
+  {
+    name: "Irish Whip Wallsplat",
+    image: "/moveImgs/basic_punch.png",
+    Rarity: "Innate",
+    Type: "Basic Vicious Strike",
+    dmg: 50,
+    category: "Basic Vicious",
+  },
+  {
+    name: "Irish Whip",
+    image: "/moveImgs/basic_punch.png",
+    Rarity: "Innate",
+    Type: "Basic Vicious Strike",
+    dmg: 20,
+    category: "Basic Vicious",
+  },
+  {
+    name: "Scissor Kick",
+    image: "/moveImgs/basic_punch.png",
+    Rarity: "Innate",
+    Type: "Basic Vicious Strike",
+    dmg: 113,
+    category: "Basic Vicious",
+  },
+  {
+    name: "Elbow Drop",
+    image: "/moveImgs/basic_punch.png",
+    Rarity: "Innate",
+    Type: "Basic Strike",
+    dmg: 80,
+    category: "Basic Vicious",
+  },
+  {
+    name: "Innate UpperCut",
+    image: "/moveImgs/basic_punch.png",
+    Rarity: "Innate",
+    Type: "Basic Strike",
+    dmg: 10,
+    category: "Basic Strike",
+  },
+  {
+    name: "Innate Second Jab",
+    image: "/moveImgs/basic_punch.png",
+    Rarity: "Innate",
+    Type: "Basic Strike",
+    dmg: 40,
+    category: "Basic Strike",
+  },
+  {
+    name: "Innate Third Jab",
+    image: "/moveImgs/basic_punch.png",
+    Rarity: "Innate",
+    Type: "Basic Strike",
+    dmg: 80,
+    category: "Basic Strike",
+  },
+  {
+    name: "Wallsplat",
+    image: "/moveImgs/basic_punch.png",
+    Rarity: "Innate",
+    Type: "Basic Strike",
+    dmg: 35,
+    category: "Basic Strike",
   },
 
   // WEAPONS //
@@ -456,5 +563,50 @@ export const moveSet = [
     viciousDMG: 227,
     category: "Item",
     thrown: 250,
+  },
+];
+
+export const comboAttacks = [
+  {
+    name: "Basic 3-Hit Jab",
+    sequence: "Innate Jab > Innate Second Jab > Innate Third Jab",
+  },
+  {
+    name: "Hot Drop",
+    sequence: "Innate Jab > Innate Second Jab > Innate UpperCut > Elbow Drop ",
+  },
+  {
+    name: "Cozmo Cling",
+    sequence: "Cozmo Shot > Innate Vicious Attack",
+  },
+  {
+    name: "Wall Whiped",
+    sequence: "Irish Whip Wallsplat > Innate Jab > Scissor Kick  > Wallsplat",
+    isSelectable: true,
+  },
+  {
+    name: "Misted",
+    sequence: "Vicious Mist",
+    isSelectable: true,
+  },
+  {
+    name: "Lil Whip",
+    sequence: "Irish Whip Wallsplat",
+    isSelectable: true,
+  },
+  {
+    name: "Dolphin Drived",
+    sequence: "Dolphin Dive",
+    isSelectable: true,
+  },
+  {
+    name: "Cuts Deep",
+    sequence: "Omega Uppercut",
+    isSelectable: true,
+  },
+  {
+    name: "Dazed Chop",
+    sequence: "Charged Innate Basic Jab",
+    isSelectable: true,
   },
 ];

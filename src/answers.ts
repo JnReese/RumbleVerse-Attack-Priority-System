@@ -8,7 +8,7 @@ export const answers: Record<string, string> = {
   Special_Vicious_lose:
     "Special Vicious (attacks gained from magazines found as loot) will lose to every attack in game besides a Basic Vicious (innate to player) attack.",
   Special_Vicious_tie:
-    "Special Vicious (your characters learned move found as loot with Vicious perk) tie on use at the same time as an opposing player will clash (no damage is delt to either player) .",
+    "Special Vicious (your characters learned move - found as loot with Vicious perk) tie on use at the same time as an opposing player will clash (no damage is delt to either player) .",
   Basic_Strike_win:
     "Basic Strikes (jabs attacks innate to player) will win to any attack that is learned and has a Visicous Perk or is just a players innate Vicious attack.",
   Basic_Strike_lose:
@@ -20,7 +20,7 @@ export const answers: Record<string, string> = {
   Special_Strike_lose:
     "Special Strikes (strikes learned from looting without a Vicious perk attached) will lose against all attacks with weapons, all strikes learned with a High-Priority perk, and a players Super.",
   Special_Strike_tie:
-    "Special Strikes (your characters learned from looting attacks with no Vicious perk) tie on use at the same time as an opposing player will clash (no damage is delt to either player).",
+    "Special Strikes (your characters learned move - from looting attacks with no Vicious perk) tie on use at the same time as an opposing player will clash (no damage is delt to either player).",
   Power_win:
     "Power moves (strikes learned from looting with a High-Priority perk) will win to opposing player using any move besides a Super.",
   Power_lose:
