@@ -5,10 +5,12 @@ import Chip from "@mui/material/Chip";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+import { IoMdArrowDropright } from "react-icons/io";
 import { useState } from "react";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { comboAttacks } from "../itemInfo";
 import { moveSet } from "../itemInfo";
+import { last } from "lodash";
 
 interface InputData {
   value: string;
@@ -25,24 +27,45 @@ export default function AttackCombos() {
     "Dazed Chop": { value: "" },
   });
 
-  const determineComboDmgRange = (baseComboDmg: number[]) => {
-    let highest = baseComboDmg.map((damage) => damage * 1.25);
-    return `Combo's lowest damage output ${baseComboDmg.reduce((partialSum, a) => partialSum + a, 0)} 
-    Combos highest damage output ${highest.reduce((partialSum, a) => partialSum + a, 0)}`;
+  const determineComboDmgRange = (baseComboDmg: number) => {
+    let highest = baseComboDmg * 1.25;
+    const startText = ["Combos lowest damage output", "Combos highest damage output"];
+    return (
+      <>
+        <p>{`${startText[0]} ${baseComboDmg}`}</p>
+        <p>{`${startText[1]} ${highest}`}</p>
+      </>
+    );
   };
 
-  const calculateLowestTotalComboDamage = (combo: string) => {
-    let wordsInString = combo.split(">");
-    let trimmedWords = wordsInString.map((word) => word.trim());
+  const moveListRender = (combo: string[], hasDropdown: boolean) => {
+    let lastItem = combo.at(-1);
+    console.log(lastItem);
 
-    if (trimmedWords.includes("ANY" || "ANY GRAB")) {
-      // place selected attack or grab into trimmmed words array
-    }
-    let matchedAttacks = moveSet.filter((move) => trimmedWords.map((word) => word).includes(move.name));
-    return matchedAttacks.map((attack) => attack.dmg);
+    const shouldRenderArrow = (idx: number) => (idx === combo.length - 1 ? hasDropdown : true);
+
+    return (
+      <ComboString>
+        {combo.map((move, idx) => (
+          <>
+            <p>{move}</p>
+            {shouldRenderArrow(idx) && <IoMdArrowDropright />}
+          </>
+        ))}
+      </ComboString>
+    );
   };
 
-  const replaceArrowWithElement = (text: string) => {};
+  const calculateLowestTotalComboDamage = (allMoves: string[]) => {
+    // NEED THIS TO OUTPUT AN OBJECT WITH DMG CALC APPLIED TO ONE OUTPUT TO PASS
+
+    let damageTotal = 0;
+    allMoves.forEach((move) => {
+      const moveData = moveSet.find((m) => m.name === move);
+      damageTotal += moveData?.dmg ?? 0;
+    });
+    return damageTotal;
+  };
 
   const handleChange = (event: SelectChangeEvent, inputName: string) => {
     setMoves({ ...moves, [inputName]: { value: event.target.value } });
@@ -55,36 +78,48 @@ export default function AttackCombos() {
         sx={{ m: 1, width: 500, height: "100%", paddingBottom: "10px", marginBottom: "30px", paddingTop: "10px" }}
       >
         <h1> Combos (ง •̀_•́)ง</h1>
-        {comboAttacks.map((combo, idx) => (
+        {comboAttacks.map((combo) => (
           <InnerContainer key={combo.name}>
             <Divider>
-              <Chip label={combo.name} />
+              <Chip label={combo.name} color="success" />
             </Divider>
-            <p>{combo.sequence}</p>
-            {combo.isSelectable ? (
-              <div>
-                <FormControl sx={{ m: 1, minWidth: 80 }}>
-                  <InputLabel id="moveSelect">Move</InputLabel>
-                  <Select
-                    labelId="moveSelect"
-                    id="comboMoveSelect"
-                    value={moves[combo.name].value}
-                    onChange={(e) => handleChange(e, combo.name)}
-                    autoWidth
-                    label="Age"
-                  >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    <MenuItem value="Jab">Jab</MenuItem>
-                    <MenuItem value="Jab Two">Jab Two</MenuItem>
-                    <MenuItem value="Jab Three">Jab Three</MenuItem>
-                  </Select>
-                </FormControl>
-              </div>
-            ) : null}
+            <ComboTextConatiner>
+              {moveListRender(combo.sequence, Boolean(combo.isSelectable))}
+              {Boolean(moves[combo.name]) && <SelectedMove>{moves[combo.name].value}</SelectedMove>}
+              {combo.isSelectable ? (
+                <div>
+                  <FormControl sx={{ m: 1, minWidth: 80 }}>
+                    <InputLabel id="moveSelect">Move</InputLabel>
+                    <Select
+                      labelId="moveSelect"
+                      id="comboMoveSelect"
+                      value={moves[combo.name].value}
+                      onChange={(e) => handleChange(e, combo.name)}
+                      autoWidth
+                      label="Age"
+                    >
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      {moveSet.map((move) => (
+                        <MenuItem value={move.name} key={move.name}>
+                          {move.name} <TinyPic src={`${process.env.PUBLIC_URL + move.image}`} alt="" />
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </div>
+              ) : null}
+            </ComboTextConatiner>
 
-            <p>{`${determineComboDmgRange(calculateLowestTotalComboDamage(combo.sequence))}`}</p>
+            <ComboDMG>
+              {determineComboDmgRange(
+                calculateLowestTotalComboDamage([
+                  ...combo.sequence,
+                  ...(moves[combo.name]?.value ? [moves[combo.name]?.value] : []),
+                ])
+              )}
+            </ComboDMG>
           </InnerContainer>
         ))}
       </Paper>
@@ -107,4 +142,21 @@ const InnerContainer = styled.div`
 const TinyPic = styled.img`
   width: 40px;
   height; 40px
+`;
+const ComboTextConatiner = styled.div`
+  display: flow-root;
+  justify-content: center;
+`;
+const ComboDMG = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const ComboString = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgoldenrodyellow;
+`;
+const SelectedMove = styled.p`
+  background-color: lightgoldenrodyellow;
 `;

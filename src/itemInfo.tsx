@@ -569,44 +569,44 @@ export const moveSet = [
 export const comboAttacks = [
   {
     name: "Basic 3-Hit Jab",
-    sequence: "Innate Jab > Innate Second Jab > Innate Third Jab",
+    sequence: ["Innate Jab", "Innate Second Jab", "Innate Third Jab"],
   },
   {
     name: "Hot Drop",
-    sequence: "Innate Jab > Innate Second Jab > Innate UpperCut > Elbow Drop ",
+    sequence: ["Innate Jab", "Innate Second Jab", "Innate UpperCut", "Elbow Drop"],
   },
   {
     name: "Cozmo Cling",
-    sequence: "Cozmo Shot > Innate Vicious Attack",
+    sequence: ["Cozmo Shot", "Innate Vicious Attack"],
   },
   {
     name: "Wall Whiped",
-    sequence: "Irish Whip Wallsplat > Innate Jab > Scissor Kick  > Wallsplat",
+    sequence: ["Irish Whip Wallsplat", "Innate Jab", "Scissor Kick", "Wallsplat"],
     isSelectable: true,
   },
   {
     name: "Misted",
-    sequence: "Vicious Mist",
+    sequence: ["Vicious Mist"],
     isSelectable: true,
   },
   {
     name: "Lil Whip",
-    sequence: "Irish Whip Wallsplat",
+    sequence: ["Irish Whip Wallsplat"],
     isSelectable: true,
   },
   {
     name: "Dolphin Drived",
-    sequence: "Dolphin Dive",
+    sequence: ["Dolphin Dive"],
     isSelectable: true,
   },
   {
     name: "Cuts Deep",
-    sequence: "Omega Uppercut",
+    sequence: ["Omega Uppercut"],
     isSelectable: true,
   },
   {
     name: "Dazed Chop",
-    sequence: "Charged Innate Basic Jab",
+    sequence: ["Charged Innate Basic Jab"],
     isSelectable: true,
   },
 ];
