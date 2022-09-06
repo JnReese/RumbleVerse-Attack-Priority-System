@@ -10,7 +10,6 @@ import { useState } from "react";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { comboAttacks } from "../itemInfo";
 import { moveSet } from "../itemInfo";
-import { last } from "lodash";
 
 interface InputData {
   value: string;
@@ -28,12 +27,13 @@ export default function AttackCombos() {
   });
 
   const determineComboDmgRange = (baseComboDmg: number) => {
-    let highest = baseComboDmg * 1.25;
-    const startText = ["Combos lowest damage output", "Combos highest damage output"];
+    console.log(baseComboDmg);
+
+    const startText = ["Combos lowest damage output :", "Combos damage with maxed attack pods :"];
     return (
       <>
         <p>{`${startText[0]} ${baseComboDmg}`}</p>
-        <p>{`${startText[1]} ${highest}`}</p>
+        <p>{`${startText[1]} ${Math.floor(baseComboDmg + 1.25 * baseComboDmg)}`}</p>
       </>
     );
   };
@@ -57,8 +57,6 @@ export default function AttackCombos() {
   };
 
   const calculateLowestTotalComboDamage = (allMoves: string[]) => {
-    // NEED THIS TO OUTPUT AN OBJECT WITH DMG CALC APPLIED TO ONE OUTPUT TO PASS
-
     let damageTotal = 0;
     allMoves.forEach((move) => {
       const moveData = moveSet.find((m) => m.name === move);
@@ -81,7 +79,7 @@ export default function AttackCombos() {
         {comboAttacks.map((combo) => (
           <InnerContainer key={combo.name}>
             <Divider>
-              <Chip label={combo.name} color="success" />
+              <Chip label={combo.name} color="success" sx={{ marginBottom: "10px" }} />
             </Divider>
             <ComboTextConatiner>
               {moveListRender(combo.sequence, Boolean(combo.isSelectable))}

@@ -577,7 +577,7 @@ export const comboAttacks = [
   },
   {
     name: "Cozmo Cling",
-    sequence: ["Cozmo Shot", "Innate Vicious Attack"],
+    sequence: ["Cozmo Shot", "Innate Basic Vicious"],
   },
   {
     name: "Wall Whiped",
